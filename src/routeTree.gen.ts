@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as FoodRouteImport } from './routes/food'
+import { Route as TraditionsRouteImport } from './routes/traditions'
+import { Route as CountrySlugRouteImport } from './routes/country.$slug'
+import { Route as FestivalsIndexRouteImport } from './routes/festivals.index'
+import { Route as FestivalsSlugRouteImport } from './routes/festivals.$slug'
+import { Route as StoriesIndexRouteImport } from './routes/stories.index'
+import { Route as StoriesSlugRouteImport } from './routes/stories.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExploreRoute = ExploreRouteImport.update({
+  id: '/explore',
+  path: '/explore',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodRoute = FoodRouteImport.update({
+  id: '/food',
+  path: '/food',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TraditionsRoute = TraditionsRouteImport.update({
+  id: '/traditions',
+  path: '/traditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CountrySlugRoute = CountrySlugRouteImport.update({
+  id: '/country/$slug',
+  path: '/country/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FestivalsIndexRoute = FestivalsIndexRouteImport.update({
+  id: '/festivals/',
+  path: '/festivals/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FestivalsSlugRoute = FestivalsSlugRouteImport.update({
+  id: '/festivals/$slug',
+  path: '/festivals/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesIndexRoute = StoriesIndexRouteImport.update({
+  id: '/stories/',
+  path: '/stories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoriesSlugRoute = StoriesSlugRouteImport.update({
+  id: '/stories/$slug',
+  path: '/stories/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/explore': typeof ExploreRoute
+  '/food': typeof FoodRoute
+  '/traditions': typeof TraditionsRoute
+  '/country/$slug': typeof CountrySlugRoute
+  '/festivals/$slug': typeof FestivalsSlugRoute
+  '/stories/$slug': typeof StoriesSlugRoute
+  '/festivals/': typeof FestivalsIndexRoute
+  '/stories/': typeof StoriesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/explore': typeof ExploreRoute
+  '/food': typeof FoodRoute
+  '/traditions': typeof TraditionsRoute
+  '/country/$slug': typeof CountrySlugRoute
+  '/festivals/$slug': typeof FestivalsSlugRoute
+  '/stories/$slug': typeof StoriesSlugRoute
+  '/festivals': typeof FestivalsIndexRoute
+  '/stories': typeof StoriesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/explore': typeof ExploreRoute
+  '/food': typeof FoodRoute
+  '/traditions': typeof TraditionsRoute
+  '/country/$slug': typeof CountrySlugRoute
+  '/festivals/$slug': typeof FestivalsSlugRoute
+  '/stories/$slug': typeof StoriesSlugRoute
+  '/festivals/': typeof FestivalsIndexRoute
+  '/stories/': typeof StoriesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/explore'
+    | '/food'
+    | '/traditions'
+    | '/country/$slug'
+    | '/festivals/$slug'
+    | '/stories/$slug'
+    | '/festivals/'
+    | '/stories/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/explore'
+    | '/food'
+    | '/traditions'
+    | '/country/$slug'
+    | '/festivals/$slug'
+    | '/stories/$slug'
+    | '/festivals'
+    | '/stories'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/explore'
+    | '/food'
+    | '/traditions'
+    | '/country/$slug'
+    | '/festivals/$slug'
+    | '/stories/$slug'
+    | '/festivals/'
+    | '/stories/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ExploreRoute: typeof ExploreRoute
+  FoodRoute: typeof FoodRoute
+  TraditionsRoute: typeof TraditionsRoute
+  CountrySlugRoute: typeof CountrySlugRoute
+  FestivalsSlugRoute: typeof FestivalsSlugRoute
+  StoriesSlugRoute: typeof StoriesSlugRoute
+  FestivalsIndexRoute: typeof FestivalsIndexRoute
+  StoriesIndexRoute: typeof StoriesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explore': {
+      id: '/explore'
+      path: '/explore'
+      fullPath: '/explore'
+      preLoaderRoute: typeof ExploreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/food': {
+      id: '/food'
+      path: '/food'
+      fullPath: '/food'
+      preLoaderRoute: typeof FoodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/traditions': {
+      id: '/traditions'
+      path: '/traditions'
+      fullPath: '/traditions'
+      preLoaderRoute: typeof TraditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/country/$slug': {
+      id: '/country/$slug'
+      path: '/country/$slug'
+      fullPath: '/country/$slug'
+      preLoaderRoute: typeof CountrySlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/festivals/': {
+      id: '/festivals/'
+      path: '/festivals'
+      fullPath: '/festivals/'
+      preLoaderRoute: typeof FestivalsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/festivals/$slug': {
+      id: '/festivals/$slug'
+      path: '/festivals/$slug'
+      fullPath: '/festivals/$slug'
+      preLoaderRoute: typeof FestivalsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/': {
+      id: '/stories/'
+      path: '/stories'
+      fullPath: '/stories/'
+      preLoaderRoute: typeof StoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/stories/$slug': {
+      id: '/stories/$slug'
+      path: '/stories/$slug'
+      fullPath: '/stories/$slug'
+      preLoaderRoute: typeof StoriesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ExploreRoute: ExploreRoute,
+  FoodRoute: FoodRoute,
+  TraditionsRoute: TraditionsRoute,
+  CountrySlugRoute: CountrySlugRoute,
+  FestivalsSlugRoute: FestivalsSlugRoute,
+  StoriesSlugRoute: StoriesSlugRoute,
+  FestivalsIndexRoute: FestivalsIndexRoute,
+  StoriesIndexRoute: StoriesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
