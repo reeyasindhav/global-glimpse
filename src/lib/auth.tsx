@@ -39,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       ready,
       saved,
       signIn: (email, name) => {
-        const u = { name: name || email.split("@")[0], email, interests: ["Festivals", "Food & drink"] };
+        const u = { name: name || email.split("@")[0] || "Explorer", email, interests: ["Festivals", "Food & drink"] };
         localStorage.setItem(KEY, JSON.stringify(u));
         setUser(u);
       },
