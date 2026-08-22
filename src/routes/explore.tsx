@@ -3,24 +3,29 @@ import { Search } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { WorldMap } from "@/components/site/WorldMap";
 import { countries, regions } from "@/lib/data";
 
-type SearchParams = { q?: string };
+type SearchParams = { q?: string | undefined };
 
 export const Route = createFileRoute("/explore")({
   validateSearch: (search: Record<string, unknown>): SearchParams => ({
-    q: typeof search.q === "string" ? search.q : undefined,
+    q: typeof search["q"] === "string" ? search["q"] : undefined,
   }),
   head: () => ({
     meta: [
       { title: "Interactive World Map Explorer — Culturiq" },
       {
         name: "description",
-        content: "Pan a stylised world map and open country profiles for traditions, festivals and food.",
+        content:
+          "Pan a stylised world map and open country profiles for traditions, festivals and food.",
       },
       { property: "og:title", content: "Interactive World Map Explorer — Culturiq" },
-      { property: "og:description", content: "Discover cultures country by country on the Culturiq map." },
+      {
+        property: "og:description",
+        content: "Discover cultures country by country on the Culturiq map.",
+      },
     ],
   }),
   component: Explore,
@@ -40,7 +45,9 @@ function Explore() {
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-12">
       <Reveal>
-        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Explore by place</p>
+        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+          Explore by place
+        </p>
         <h1 className="mt-2 text-4xl font-extrabold md:text-6xl">The world, one pin at a time</h1>
         <p className="mt-4 max-w-lg text-muted-foreground">
           Hover a pin to preview, click a card to open the full country profile.
@@ -63,7 +70,9 @@ function Explore() {
               key={r}
               onClick={() => setRegion(r)}
               className={`rounded-full border px-4 py-2 text-xs font-medium transition-all hover:-translate-y-0.5 ${
-                region === r ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+                region === r
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-card"
               }`}
             >
               {r}
@@ -85,14 +94,19 @@ function Explore() {
               className="hover-lift group block overflow-hidden rounded-3xl border border-border bg-card"
             >
               <div className="relative h-44 overflow-hidden">
-                <img
+                <CultureImage
                   src={c.image}
                   alt={c.name}
                   className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className={`absolute inset-0 bg-gradient-to-tr ${c.colors} mix-blend-multiply`} />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-tr ${c.colors} mix-blend-multiply`}
+                />
                 <span className="absolute top-3 left-3 rounded-full bg-cream/95 px-3 py-1 text-xs font-bold">
                   {c.flag} {c.region}
+                </span>
+                <span className="absolute bottom-3 right-3 rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-white">
+                  {c.imageAttribution}
                 </span>
               </div>
               <div className="p-5">
@@ -107,6 +121,9 @@ function Explore() {
           <p className="text-muted-foreground">No countries match that search yet.</p>
         )}
       </div>
+      <p className="mt-12 text-center text-xs text-muted-foreground">
+        Country imagery sourced from Wikimedia Commons under Creative Commons licences.
+      </p>
     </div>
   );
 }

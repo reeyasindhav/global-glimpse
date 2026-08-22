@@ -3,6 +3,7 @@ import { ArrowLeft, Bookmark } from "lucide-react";
 import { toast } from "sonner";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { Button } from "@/components/ui/button";
 import { stories } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
@@ -15,7 +16,9 @@ export const Route = createFileRoute("/stories/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData)
-      return { meta: [{ title: "Story not found — Culturiq" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "Story not found — Culturiq" }, { name: "robots", content: "noindex" }],
+      };
     const s = loaderData.story;
     return {
       meta: [
@@ -36,7 +39,10 @@ function StoryPage() {
 
   return (
     <article className="mx-auto w-full max-w-3xl px-5 py-12">
-      <Link to="/stories" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary">
+      <Link
+        to="/stories"
+        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary"
+      >
         <ArrowLeft className="size-4" /> All stories
       </Link>
       <Reveal className="mt-6">
@@ -45,8 +51,16 @@ function StoryPage() {
         </p>
         <h1 className="mt-3 text-4xl leading-tight font-extrabold md:text-5xl">{s.title}</h1>
       </Reveal>
-      <Reveal delay={100} className="mt-8 overflow-hidden rounded-3xl">
-        <img src={s.image} alt={s.title} className="w-full object-cover" />
+      <Reveal delay={100} className="relative mt-8 overflow-hidden rounded-3xl">
+        <CultureImage
+          src={s.image}
+          alt={s.title}
+          sizes="(min-width: 768px) 768px, 100vw"
+          className="w-full object-cover"
+        />
+        <span className="absolute bottom-2 right-2 rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-white">
+          {s.attribution}
+        </span>
       </Reveal>
       <Reveal delay={140} className="mt-8 space-y-5 text-lg leading-relaxed text-foreground/85">
         {s.body.map((p) => (
@@ -62,7 +76,8 @@ function StoryPage() {
             toast.success(isSaved ? "Removed from collection" : "Saved to your collection");
           }}
         >
-          <Bookmark className={`size-4 ${isSaved ? "fill-current" : ""}`} /> {isSaved ? "Saved" : "Save story"}
+          <Bookmark className={`size-4 ${isSaved ? "fill-current" : ""}`} />{" "}
+          {isSaved ? "Saved" : "Save story"}
         </Button>
         <Button asChild variant="outline" className="rounded-full">
           <Link to="/explore">Explore the map</Link>

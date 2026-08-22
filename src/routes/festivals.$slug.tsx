@@ -3,6 +3,7 @@ import { ArrowLeft, Bookmark, CalendarDays, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { Button } from "@/components/ui/button";
 import { countries, festivals } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
@@ -15,7 +16,9 @@ export const Route = createFileRoute("/festivals/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData)
-      return { meta: [{ title: "Festival not found — Culturiq" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "Festival not found — Culturiq" }, { name: "robots", content: "noindex" }],
+      };
     const f = loaderData.festival;
     return {
       meta: [
@@ -38,10 +41,22 @@ function FestivalPage() {
   return (
     <article>
       <div className="relative h-[46vh] min-h-[320px] overflow-hidden">
-        <img src={f.image} alt={f.name} className="size-full object-cover" />
+        <CultureImage
+          src={f.image}
+          alt={f.name}
+          priority
+          sizes="100vw"
+          className="size-full object-cover"
+        />
+        <span className="absolute bottom-4 right-4 rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-white">
+          {f.attribution}
+        </span>
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/10" />
         <div className="absolute bottom-0 mx-auto w-full max-w-5xl px-5 pb-10 text-cream">
-          <Link to="/festivals" className="inline-flex items-center gap-2 text-sm text-cream/80 hover:text-cream">
+          <Link
+            to="/festivals"
+            className="inline-flex items-center gap-2 text-sm text-cream/80 hover:text-cream"
+          >
             <ArrowLeft className="size-4" /> Festival calendar
           </Link>
           <h1 className="reveal mt-4 text-4xl font-extrabold md:text-6xl">{f.name}</h1>
@@ -76,13 +91,17 @@ function FestivalPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {["What to wear", "What to eat", "How to join in"].map((t, i) => (
               <div key={t} className="rounded-2xl border border-border bg-card p-4">
-                <p className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">{t}</p>
+                <p className="text-xs font-semibold tracking-[0.14em] text-primary uppercase">
+                  {t}
+                </p>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  {[
-                    "Light clothes you don't mind staining, and comfortable shoes.",
-                    "Street stalls open early; try the festival-only sweets first.",
-                    "Follow the lead of hosts and ask before photographing rituals.",
-                  ][i]}
+                  {
+                    [
+                      "Light clothes you don't mind staining, and comfortable shoes.",
+                      "Street stalls open early; try the festival-only sweets first.",
+                      "Follow the lead of hosts and ask before photographing rituals.",
+                    ][i]
+                  }
                 </p>
               </div>
             ))}
@@ -97,7 +116,11 @@ function FestivalPage() {
               onClick={() => {
                 toggleSaved(f.slug);
                 toast.success(
-                  isSaved ? "Removed from your collection" : user ? "Saved to your dashboard" : "Saved — sign in to sync",
+                  isSaved
+                    ? "Removed from your collection"
+                    : user
+                      ? "Saved to your dashboard"
+                      : "Saved — sign in to sync",
                 );
               }}
             >
@@ -124,7 +147,11 @@ function FestivalPage() {
                   .filter((o) => o.monthIndex === f.monthIndex && o.slug !== f.slug)
                   .map((o) => (
                     <li key={o.slug}>
-                      <Link to="/festivals/$slug" params={{ slug: o.slug }} className="hover:underline">
+                      <Link
+                        to="/festivals/$slug"
+                        params={{ slug: o.slug }}
+                        className="hover:underline"
+                      >
                         {o.name}
                       </Link>
                     </li>

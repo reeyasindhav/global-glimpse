@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bookmark, Trash2 } from "lucide-react";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { Button } from "@/components/ui/button";
 import { countries, festivals, stories } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
@@ -10,7 +11,10 @@ export const Route = createFileRoute("/_authenticated/collection")({
   head: () => ({
     meta: [
       { title: "My collection — Culturiq" },
-      { name: "description", content: "Everything you've saved: countries, festivals and stories in one place." },
+      {
+        name: "description",
+        content: "Everything you've saved: countries, festivals and stories in one place.",
+      },
       { property: "og:title", content: "My collection — Culturiq" },
       { property: "og:description", content: "Your saved cultures on Culturiq." },
     ],
@@ -22,9 +26,27 @@ function Collection() {
   const { saved, toggleSaved } = useAuth();
 
   const items = [
-    ...countries.filter((c) => saved.includes(c.slug)).map((c) => ({ kind: "Country", slug: c.slug, title: c.name, sub: c.tagline, image: c.image })),
-    ...festivals.filter((f) => saved.includes(f.slug)).map((f) => ({ kind: "Festival", slug: f.slug, title: f.name, sub: `${f.country} · ${f.dates}`, image: f.image })),
-    ...stories.filter((s) => saved.includes(s.slug)).map((s) => ({ kind: "Story", slug: s.slug, title: s.title, sub: s.read, image: s.image })),
+    ...countries
+      .filter((c) => saved.includes(c.slug))
+      .map((c) => ({
+        kind: "Country",
+        slug: c.slug,
+        title: c.name,
+        sub: c.tagline,
+        image: c.image,
+      })),
+    ...festivals
+      .filter((f) => saved.includes(f.slug))
+      .map((f) => ({
+        kind: "Festival",
+        slug: f.slug,
+        title: f.name,
+        sub: `${f.country} · ${f.dates}`,
+        image: f.image,
+      })),
+    ...stories
+      .filter((s) => saved.includes(s.slug))
+      .map((s) => ({ kind: "Story", slug: s.slug, title: s.title, sub: s.read, image: s.image })),
   ];
 
   return (
@@ -36,7 +58,10 @@ function Collection() {
       </Reveal>
 
       {items.length === 0 ? (
-        <Reveal delay={100} className="mt-10 rounded-3xl border border-dashed border-border bg-card p-12 text-center">
+        <Reveal
+          delay={100}
+          className="mt-10 rounded-3xl border border-dashed border-border bg-card p-12 text-center"
+        >
           <Bookmark className="mx-auto size-8 text-muted-foreground" />
           <h2 className="mt-4 text-xl font-bold">Nothing saved yet</h2>
           <p className="mt-2 text-muted-foreground">
@@ -51,9 +76,11 @@ function Collection() {
           {items.map((it, i) => (
             <Reveal key={it.kind + it.slug} delay={(i % 6) * 70}>
               <div className="hover-lift overflow-hidden rounded-3xl border border-border bg-card">
-                <img src={it.image} alt={it.title} className="h-40 w-full object-cover" />
+                <CultureImage src={it.image} alt={it.title} className="h-40 w-full object-cover" />
                 <div className="p-5">
-                  <p className="text-[11px] font-semibold tracking-[0.14em] text-primary uppercase">{it.kind}</p>
+                  <p className="text-[11px] font-semibold tracking-[0.14em] text-primary uppercase">
+                    {it.kind}
+                  </p>
                   <h3 className="mt-1 font-bold">{it.title}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">{it.sub}</p>
                   <button

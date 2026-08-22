@@ -30,7 +30,11 @@ export function WorldMap({ compact = false }: { compact?: boolean }) {
             <circle r="2.6" className="fill-primary/25" />
             <circle r="1.25" className="fill-primary" />
             {active === c.slug && (
-              <text y="-4" textAnchor="middle" className="fill-jade-foreground text-[3px] font-bold">
+              <text
+                y="-4"
+                textAnchor="middle"
+                className="fill-jade-foreground text-[3px] font-bold"
+              >
                 {c.name}
               </text>
             )}

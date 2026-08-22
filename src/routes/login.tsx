@@ -12,7 +12,10 @@ export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
       { title: "Sign in — Culturiq" },
-      { name: "description", content: "Sign in to Culturiq to sync your saved countries, festivals and stories." },
+      {
+        name: "description",
+        content: "Sign in to Culturiq to sync your saved countries, festivals and stories.",
+      },
       { property: "og:title", content: "Sign in — Culturiq" },
       { property: "og:description", content: "Access your cultural collection." },
     ],

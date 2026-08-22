@@ -4,6 +4,17 @@ import { useState } from "react";
 
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const nav = [
   { to: "/explore", label: "Explore" },
@@ -52,9 +63,26 @@ export function SiteHeader() {
               <Button asChild variant="ghost" size="sm">
                 <Link to="/dashboard">{user.name}</Link>
               </Button>
-              <Button size="sm" variant="outline" onClick={signOut}>
-                Sign out
-              </Button>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button size="sm" variant="outline">
+                    Sign out
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Sign out of Culturiq?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      Your saved items will remain stored in your browser. You'll need to sign in
+                      again to access your collection and dashboard.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction onClick={signOut}>Sign out</AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </>
           ) : (
             <>
@@ -85,7 +113,11 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
-            <Link to={user ? "/dashboard" : "/login"} onClick={() => setOpen(false)} className="text-sm font-semibold text-primary">
+            <Link
+              to={user ? "/dashboard" : "/login"}
+              onClick={() => setOpen(false)}
+              className="text-sm font-semibold text-primary"
+            >
               {user ? "Dashboard" : "Sign in"}
             </Link>
           </div>

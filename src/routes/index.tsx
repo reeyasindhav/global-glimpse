@@ -1,8 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Search, Sparkles } from "lucide-react";
+import { ArrowRight, Compass, MapPin, Search } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal, SectionHead } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { WorldMap } from "@/components/site/WorldMap";
 import { Button } from "@/components/ui/button";
 import { countries, festivals, stories } from "@/lib/data";
@@ -40,11 +41,14 @@ function Home() {
       {/* HERO */}
       <section className="relative overflow-hidden">
         <div className="float-slow absolute -top-10 right-10 size-64 rounded-full bg-saffron/50 blur-[2px]" />
-        <div className="float-slow absolute top-52 right-40 size-56 rounded-full bg-jade/30" style={{ animationDelay: "1.4s" }} />
+        <div
+          className="float-slow absolute top-52 right-40 size-56 rounded-full bg-jade/30"
+          style={{ animationDelay: "1.4s" }}
+        />
         <div className="relative mx-auto w-full max-w-7xl px-5 py-16 md:py-24">
           <div className="reveal max-w-2xl">
             <span className="inline-flex items-center gap-2 rounded-full bg-saffron px-3 py-1.5 text-[11px] font-bold tracking-[0.16em] text-saffron-foreground uppercase">
-              <Sparkles className="size-3" /> A more curious world starts here
+              <Compass className="size-3" /> A more curious world starts here
             </span>
             <h1 className="mt-6 text-5xl leading-[0.95] font-extrabold text-balance-tight md:text-7xl">
               One world. <span className="text-primary">Countless</span> ways to celebrate.
@@ -107,7 +111,7 @@ function Home() {
                 params={{ slug: lead.slug }}
                 className="hover-lift group relative block h-[340px] overflow-hidden rounded-3xl"
               >
-                <img
+                <CultureImage
                   src={lead.image}
                   alt={lead.title}
                   className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -173,7 +177,7 @@ function Home() {
                   className="hover-lift block overflow-hidden rounded-3xl border border-border bg-card"
                 >
                   <div className="relative h-40">
-                    <img src={f.image} alt={f.name} className="size-full object-cover" />
+                    <CultureImage src={f.image} alt={f.name} className="size-full object-cover" />
                     <span className="absolute top-3 left-3 rounded-lg bg-cream/95 px-2 py-1 text-xs font-bold">
                       {f.dates}
                     </span>
@@ -200,7 +204,7 @@ function Home() {
             <Reveal key={s.slug} delay={i * 100}>
               <Link to="/stories/$slug" params={{ slug: s.slug }} className="group block">
                 <div className="overflow-hidden rounded-2xl">
-                  <img
+                  <CultureImage
                     src={s.image}
                     alt={s.title}
                     className="h-52 w-full object-cover transition-transform duration-700 group-hover:scale-105"

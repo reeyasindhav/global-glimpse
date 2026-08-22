@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { regions, stories } from "@/lib/data";
 
 export const Route = createFileRoute("/stories/")({
@@ -36,7 +37,9 @@ function Stories() {
             key={r}
             onClick={() => setRegion(r)}
             className={`rounded-full border px-4 py-2 text-xs font-medium transition-all hover:-translate-y-0.5 ${
-              region === r ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+              region === r
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-card"
             }`}
           >
             {r}
@@ -48,12 +51,15 @@ function Stories() {
         {list.map((s, i) => (
           <Reveal key={s.slug} delay={(i % 4) * 90}>
             <Link to="/stories/$slug" params={{ slug: s.slug }} className="group block">
-              <div className="overflow-hidden rounded-3xl">
-                <img
+              <div className="relative overflow-hidden rounded-3xl">
+                <CultureImage
                   src={s.image}
                   alt={s.title}
                   className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
+                <span className="absolute bottom-2 right-2 rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-white">
+                  {s.attribution}
+                </span>
               </div>
               <p className="mt-4 text-[11px] font-semibold tracking-[0.16em] text-muted-foreground uppercase">
                 {s.kicker} · {s.country} · {s.read}
@@ -64,6 +70,9 @@ function Stories() {
           </Reveal>
         ))}
       </div>
+      <p className="mt-12 text-center text-xs text-muted-foreground">
+        Story imagery sourced from Wikimedia Commons under Creative Commons licences.
+      </p>
     </div>
   );
 }

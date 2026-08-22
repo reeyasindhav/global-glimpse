@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { regions, traditionCards } from "@/lib/data";
 
 export const Route = createFileRoute("/traditions")({
@@ -10,7 +11,8 @@ export const Route = createFileRoute("/traditions")({
       { title: "Traditions & Rituals — Culturiq" },
       {
         name: "description",
-        content: "Cards of living traditions: greetings, crafts, ceremonies and everyday rituals worldwide.",
+        content:
+          "Cards of living traditions: greetings, crafts, ceremonies and everyday rituals worldwide.",
       },
       { property: "og:title", content: "Traditions & Rituals — Culturiq" },
       { property: "og:description", content: "Explore living traditions from every region." },
@@ -26,7 +28,9 @@ function Traditions() {
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-12">
       <Reveal>
-        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Living heritage</p>
+        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+          Living heritage
+        </p>
         <h1 className="mt-2 text-4xl font-extrabold md:text-6xl">Traditions, up close</h1>
         <p className="mt-4 max-w-lg text-muted-foreground">
           {traditionCards.length} practices — some ceremonial, most utterly everyday.
@@ -39,7 +43,9 @@ function Traditions() {
             key={r}
             onClick={() => setRegion(r)}
             className={`rounded-full border px-4 py-2 text-xs font-medium transition-all hover:-translate-y-0.5 ${
-              region === r ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+              region === r
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-card"
             }`}
           >
             {r}
@@ -49,9 +55,20 @@ function Traditions() {
 
       <div className="mt-10 columns-1 gap-6 sm:columns-2 lg:columns-3">
         {list.map((t, i) => (
-          <Reveal key={t.title + t.country} delay={(i % 6) * 70} className="mb-6 break-inside-avoid">
+          <Reveal
+            key={t.title + t.country}
+            delay={(i % 6) * 70}
+            className="mb-6 break-inside-avoid"
+          >
             <div className="hover-lift overflow-hidden rounded-3xl border border-border bg-card">
-              <img src={t.image} alt={t.title} className="h-44 w-full object-cover" />
+              <div className="relative">
+                <CultureImage src={t.image} alt={t.title} className="h-44 w-full object-cover" />
+                {t.attribution && (
+                  <span className="absolute bottom-1 right-1 rounded-full bg-black/40 px-1.5 py-0.5 text-[9px] text-white">
+                    {t.attribution}
+                  </span>
+                )}
+              </div>
               <div className="p-5">
                 <Link
                   to="/country/$slug"
@@ -67,6 +84,9 @@ function Traditions() {
           </Reveal>
         ))}
       </div>
+      <p className="mt-12 text-center text-xs text-muted-foreground">
+        Culture photography sourced from Wikimedia Commons under Creative Commons licences.
+      </p>
     </div>
   );
 }

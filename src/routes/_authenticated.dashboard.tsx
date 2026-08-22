@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Flame, Globe2, Sparkles } from "lucide-react";
+import { Bookmark, Flame, Globe2 } from "lucide-react";
 
 import { Reveal, SectionHead } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { Progress } from "@/components/ui/progress";
 import { countries, festivals, regions, stories } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
@@ -10,7 +11,10 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
     meta: [
       { title: "Your dashboard — Culturiq" },
-      { name: "description", content: "Your cultural learning dashboard: saved places, streaks and what's next." },
+      {
+        name: "description",
+        content: "Your cultural learning dashboard: saved places, streaks and what's next.",
+      },
       { property: "og:title", content: "Your dashboard — Culturiq" },
       { property: "og:description", content: "Track your journey through world cultures." },
     ],
@@ -26,7 +30,9 @@ function Dashboard() {
   return (
     <div>
       <Reveal>
-        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Your journey</p>
+        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+          Your journey
+        </p>
         <h1 className="mt-2 text-4xl font-extrabold md:text-5xl">
           Hello, {user?.name.split(" ")[0]} 👋
         </h1>
@@ -37,9 +43,24 @@ function Dashboard() {
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
         {[
-          { icon: Globe2, label: "Countries explored", value: `${explored}`, tint: "bg-jade text-jade-foreground" },
-          { icon: Flame, label: "Day streak", value: "7", tint: "bg-primary text-primary-foreground" },
-          { icon: Sparkles, label: "Items saved", value: `${saved.length}`, tint: "bg-saffron text-saffron-foreground" },
+          {
+            icon: Globe2,
+            label: "Countries explored",
+            value: `${explored}`,
+            tint: "bg-jade text-jade-foreground",
+          },
+          {
+            icon: Flame,
+            label: "Day streak",
+            value: "7",
+            tint: "bg-primary text-primary-foreground",
+          },
+          {
+            icon: Bookmark,
+            label: "Items saved",
+            value: `${saved.length}`,
+            tint: "bg-saffron text-saffron-foreground",
+          },
         ].map((s, i) => (
           <Reveal key={s.label} delay={i * 80}>
             <div className="rounded-3xl border border-border bg-card p-6">
@@ -93,9 +114,11 @@ function Dashboard() {
                 params={{ slug: f.slug }}
                 className="hover-lift block overflow-hidden rounded-3xl border border-border bg-card"
               >
-                <img src={f.image} alt={f.name} className="h-36 w-full object-cover" />
+                <CultureImage src={f.image} alt={f.name} className="h-36 w-full object-cover" />
                 <div className="p-5">
-                  <p className="text-[11px] font-semibold tracking-[0.14em] text-primary uppercase">{f.dates}</p>
+                  <p className="text-[11px] font-semibold tracking-[0.14em] text-primary uppercase">
+                    {f.dates}
+                  </p>
                   <h3 className="mt-1 font-bold">{f.name}</h3>
                   <p className="text-sm text-muted-foreground">{f.country}</p>
                 </div>
@@ -111,7 +134,11 @@ function Dashboard() {
           {stories.slice(1, 4).map((s, i) => (
             <Reveal key={s.slug} delay={i * 80}>
               <Link to="/stories/$slug" params={{ slug: s.slug }} className="group block">
-                <img src={s.image} alt={s.title} className="h-40 w-full rounded-2xl object-cover" />
+                <CultureImage
+                  src={s.image}
+                  alt={s.title}
+                  className="h-40 w-full rounded-2xl object-cover"
+                />
                 <h3 className="mt-3 font-bold group-hover:text-primary">{s.title}</h3>
                 <p className="text-sm text-muted-foreground">{s.read}</p>
               </Link>

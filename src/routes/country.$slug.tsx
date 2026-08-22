@@ -3,6 +3,7 @@ import { Bookmark, Globe2, Languages, MapPin, Users } from "lucide-react";
 import { toast } from "sonner";
 
 import { Reveal, SectionHead } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { Button } from "@/components/ui/button";
 import { countries, festivals } from "@/lib/data";
 import { useAuth } from "@/lib/auth";
@@ -15,7 +16,9 @@ export const Route = createFileRoute("/country/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData)
-      return { meta: [{ title: "Country not found — Culturiq" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [{ title: "Country not found — Culturiq" }, { name: "robots", content: "noindex" }],
+      };
     const c = loaderData.country;
     return {
       meta: [
@@ -45,7 +48,16 @@ function CountryPage() {
   return (
     <div>
       <section className="relative h-[52vh] min-h-[360px] overflow-hidden">
-        <img src={c.image} alt={c.name} className="size-full object-cover" />
+        <CultureImage
+          src={c.image}
+          alt={c.name}
+          priority
+          sizes="100vw"
+          className="size-full object-cover"
+        />
+        <span className="absolute bottom-4 right-4 rounded-full bg-black/40 px-2 py-0.5 text-[10px] text-white">
+          {c.imageAttribution}
+        </span>
         <div className={`absolute inset-0 bg-gradient-to-tr ${c.colors} mix-blend-multiply`} />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent" />
         <div className="absolute bottom-0 mx-auto w-full max-w-7xl px-5 pb-10 text-cream">
@@ -64,7 +76,9 @@ function CountryPage() {
                   <f.icon className="size-4" />
                 </span>
                 <div>
-                  <p className="text-[11px] tracking-[0.14em] text-muted-foreground uppercase">{f.label}</p>
+                  <p className="text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                    {f.label}
+                  </p>
                   <p className="font-semibold">{f.value}</p>
                 </div>
               </div>
@@ -81,7 +95,9 @@ function CountryPage() {
             variant={isSaved ? "secondary" : "default"}
             onClick={() => {
               toggleSaved(c.slug);
-              toast.success(isSaved ? "Removed from collection" : `${c.name} saved to your collection`);
+              toast.success(
+                isSaved ? "Removed from collection" : `${c.name} saved to your collection`,
+              );
             }}
           >
             <Bookmark className={`size-4 ${isSaved ? "fill-current" : ""}`} />
@@ -120,7 +136,7 @@ function CountryPage() {
             {c.dishes.map((d, i) => (
               <Reveal key={d.name} delay={i * 90}>
                 <div className="hover-lift overflow-hidden rounded-3xl border border-border bg-card">
-                  <img src={d.image} alt={d.name} className="h-44 w-full object-cover" />
+                  <CultureImage src={d.image} alt={d.name} className="h-44 w-full object-cover" />
                   <div className="p-5">
                     <h3 className="font-bold">{d.name}</h3>
                     <p className="mt-1 text-sm text-muted-foreground">{d.note}</p>
@@ -142,7 +158,11 @@ function CountryPage() {
                     params={{ slug: f.slug }}
                     className="hover-lift flex gap-4 rounded-3xl border border-border bg-card p-4"
                   >
-                    <img src={f.image} alt={f.name} className="size-24 rounded-2xl object-cover" />
+                    <CultureImage
+                      src={f.image}
+                      alt={f.name}
+                      className="size-24 rounded-2xl object-cover"
+                    />
                     <div>
                       <p className="text-[11px] font-semibold tracking-[0.14em] text-primary uppercase">
                         {f.dates}

@@ -14,7 +14,10 @@ export const Route = createFileRoute("/about")({
           "Culturiq consolidates world traditions, festival calendars and cuisines into one interactive, visual learning space.",
       },
       { property: "og:title", content: "About Culturiq" },
-      { property: "og:description", content: "A visual, structured way to learn about world cultures." },
+      {
+        property: "og:description",
+        content: "A visual, structured way to learn about world cultures.",
+      },
     ],
   }),
   component: About,
@@ -42,7 +45,9 @@ function About() {
         <div className="float-slow absolute -top-16 -right-10 size-72 rounded-full bg-jade/30" />
         <div className="relative mx-auto w-full max-w-5xl px-5 py-20">
           <Reveal>
-            <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">About us</p>
+            <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+              About us
+            </p>
             <h1 className="mt-3 text-4xl font-extrabold md:text-6xl">
               Cultural learning shouldn't feel like homework.
             </h1>
@@ -60,7 +65,9 @@ function About() {
           <Reveal key={s.label} delay={i * 80}>
             <div className="rounded-3xl border border-border bg-card p-6 text-center">
               <p className="font-display text-4xl font-extrabold text-primary">{s.value}</p>
-              <p className="mt-1 text-xs tracking-[0.14em] text-muted-foreground uppercase">{s.label}</p>
+              <p className="mt-1 text-xs tracking-[0.14em] text-muted-foreground uppercase">
+                {s.label}
+              </p>
             </div>
           </Reveal>
         ))}
@@ -94,7 +101,11 @@ function About() {
               <Button asChild className="rounded-full">
                 <Link to="/signup">Create an account</Link>
               </Button>
-              <Button asChild variant="outline" className="rounded-full border-cream/30 bg-transparent text-cream hover:bg-cream/10">
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-full border-cream/30 bg-transparent text-cream hover:bg-cream/10"
+              >
                 <Link to="/explore">Open the map</Link>
               </Button>
             </div>

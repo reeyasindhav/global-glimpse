@@ -3,6 +3,7 @@ import { CalendarDays } from "lucide-react";
 import { useState } from "react";
 
 import { Reveal } from "@/components/site/Reveal";
+import { CultureImage } from "@/components/site/CultureImage";
 import { festivals, months, regions } from "@/lib/data";
 
 export const Route = createFileRoute("/festivals/")({
@@ -27,7 +28,9 @@ function Festivals() {
   return (
     <div className="mx-auto w-full max-w-7xl px-5 py-12">
       <Reveal>
-        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">Mark your calendar</p>
+        <p className="text-xs font-semibold tracking-[0.18em] text-primary uppercase">
+          Mark your calendar
+        </p>
         <h1 className="mt-2 text-4xl font-extrabold md:text-6xl">A year of celebrations</h1>
       </Reveal>
 
@@ -37,7 +40,9 @@ function Festivals() {
             key={r}
             onClick={() => setRegion(r)}
             className={`rounded-full border px-4 py-2 text-xs font-medium transition-all hover:-translate-y-0.5 ${
-              region === r ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+              region === r
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-card"
             }`}
           >
             {r}
@@ -67,7 +72,7 @@ function Festivals() {
                       params={{ slug: f.slug }}
                       className="hover-lift group flex gap-4 rounded-3xl border border-border bg-card p-4"
                     >
-                      <img
+                      <CultureImage
                         src={f.image}
                         alt={f.name}
                         className="size-24 shrink-0 rounded-2xl object-cover transition-transform duration-500 group-hover:scale-105"
@@ -90,6 +95,9 @@ function Festivals() {
           );
         })}
       </div>
+      <p className="mt-12 text-center text-xs text-muted-foreground">
+        Festival imagery sourced from Wikimedia Commons under Creative Commons licences.
+      </p>
     </div>
   );
 }

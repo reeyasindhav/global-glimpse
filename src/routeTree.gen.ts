@@ -10,10 +10,20 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteImport } from './routes/_authenticated'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FoodRouteImport } from './routes/food'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as SignupRouteImport } from './routes/signup'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as TraditionsRouteImport } from './routes/traditions'
+import { Route as AuthenticatedCollectionRouteImport } from './routes/_authenticated.collection'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated.dashboard'
 import { Route as CountrySlugRouteImport } from './routes/country.$slug'
 import { Route as FestivalsIndexRouteImport } from './routes/festivals.index'
 import { Route as FestivalsSlugRouteImport } from './routes/festivals.$slug'
@@ -25,9 +35,23 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRoute = AuthenticatedRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExploreRoute = ExploreRouteImport.update({
@@ -35,15 +59,50 @@ const ExploreRoute = ExploreRouteImport.update({
   path: '/explore',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FoodRoute = FoodRouteImport.update({
   id: '/food',
   path: '/food',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TraditionsRoute = TraditionsRouteImport.update({
   id: '/traditions',
   path: '/traditions',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedCollectionRoute = AuthenticatedCollectionRouteImport.update({
+  id: '/collection',
+  path: '/collection',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
 const CountrySlugRoute = CountrySlugRouteImport.update({
   id: '/country/$slug',
@@ -74,9 +133,18 @@ const StoriesSlugRoute = StoriesSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/explore': typeof ExploreRoute
+  '/faq': typeof FaqRoute
   '/food': typeof FoodRoute
+  '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/traditions': typeof TraditionsRoute
+  '/collection': typeof AuthenticatedCollectionRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/country/$slug': typeof CountrySlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -86,9 +154,18 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/explore': typeof ExploreRoute
+  '/faq': typeof FaqRoute
   '/food': typeof FoodRoute
+  '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/traditions': typeof TraditionsRoute
+  '/collection': typeof AuthenticatedCollectionRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/country/$slug': typeof CountrySlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -98,10 +175,20 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/cookies': typeof CookiesRoute
   '/explore': typeof ExploreRoute
+  '/faq': typeof FaqRoute
   '/food': typeof FoodRoute
+  '/login': typeof LoginRoute
+  '/privacy': typeof PrivacyRoute
+  '/signup': typeof SignupRoute
+  '/terms': typeof TermsRoute
   '/traditions': typeof TraditionsRoute
+  '/_authenticated/collection': typeof AuthenticatedCollectionRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/country/$slug': typeof CountrySlugRoute
   '/festivals/$slug': typeof FestivalsSlugRoute
   '/stories/$slug': typeof StoriesSlugRoute
@@ -113,9 +200,18 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/contact'
+    | '/cookies'
     | '/explore'
+    | '/faq'
     | '/food'
+    | '/login'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
     | '/traditions'
+    | '/collection'
+    | '/dashboard'
     | '/country/$slug'
     | '/festivals/$slug'
     | '/stories/$slug'
@@ -125,9 +221,18 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/contact'
+    | '/cookies'
     | '/explore'
+    | '/faq'
     | '/food'
+    | '/login'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
     | '/traditions'
+    | '/collection'
+    | '/dashboard'
     | '/country/$slug'
     | '/festivals/$slug'
     | '/stories/$slug'
@@ -136,10 +241,20 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
+    | '/contact'
+    | '/cookies'
     | '/explore'
+    | '/faq'
     | '/food'
+    | '/login'
+    | '/privacy'
+    | '/signup'
+    | '/terms'
     | '/traditions'
+    | '/_authenticated/collection'
+    | '/_authenticated/dashboard'
     | '/country/$slug'
     | '/festivals/$slug'
     | '/stories/$slug'
@@ -149,9 +264,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
   AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  CookiesRoute: typeof CookiesRoute
   ExploreRoute: typeof ExploreRoute
+  FaqRoute: typeof FaqRoute
   FoodRoute: typeof FoodRoute
+  LoginRoute: typeof LoginRoute
+  PrivacyRoute: typeof PrivacyRoute
+  SignupRoute: typeof SignupRoute
+  TermsRoute: typeof TermsRoute
   TraditionsRoute: typeof TraditionsRoute
   CountrySlugRoute: typeof CountrySlugRoute
   FestivalsSlugRoute: typeof FestivalsSlugRoute
@@ -169,11 +292,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/explore': {
@@ -183,11 +327,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/food': {
       id: '/food'
       path: '/food'
       fullPath: '/food'
       preLoaderRoute: typeof FoodRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/traditions': {
@@ -196,6 +375,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/traditions'
       preLoaderRoute: typeof TraditionsRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/collection': {
+      id: '/_authenticated/collection'
+      path: '/collection'
+      fullPath: '/collection'
+      preLoaderRoute: typeof AuthenticatedCollectionRouteImport
+      parentRoute: typeof AuthenticatedRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRoute
     }
     '/country/$slug': {
       id: '/country/$slug'
@@ -235,11 +428,33 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedCollectionRoute: typeof AuthenticatedCollectionRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedCollectionRoute: AuthenticatedCollectionRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
   AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  CookiesRoute: CookiesRoute,
   ExploreRoute: ExploreRoute,
+  FaqRoute: FaqRoute,
   FoodRoute: FoodRoute,
+  LoginRoute: LoginRoute,
+  PrivacyRoute: PrivacyRoute,
+  SignupRoute: SignupRoute,
+  TermsRoute: TermsRoute,
   TraditionsRoute: TraditionsRoute,
   CountrySlugRoute: CountrySlugRoute,
   FestivalsSlugRoute: FestivalsSlugRoute,

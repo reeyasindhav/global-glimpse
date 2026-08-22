@@ -12,12 +12,15 @@ export const Route = createFileRoute("/signup")({
   head: () => ({
     meta: [
       { title: "Create your account — Culturiq" },
-      { name: "description", content: "Join Culturiq to save countries, festivals and cultural stories." },
+      {
+        name: "description",
+        content: "Join Culturiq to save countries, festivals and cultural stories.",
+      },
       { property: "og:title", content: "Create your account — Culturiq" },
       { property: "og:description", content: "Start your cultural collection in under a minute." },
     ],
   }),
-  component: Signup;
+  component: Signup,
 });
 
 const topics = ["Festivals", "Food & drink", "Traditions", "Arts & craft", "Music", "Language"];
@@ -81,15 +84,35 @@ function Signup() {
             <div className="mt-6 space-y-4">
               <div>
                 <Label htmlFor="name">Full name</Label>
-                <Input id="name" value={name} onChange={(e) => setName(e.target.value)} className="mt-1.5" placeholder="Riya Sindhav" />
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="mt-1.5"
+                  placeholder="Riya Sindhav"
+                />
               </div>
               <div>
                 <Label htmlFor="email2">Email</Label>
-                <Input id="email2" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-1.5" placeholder="you@example.com" />
+                <Input
+                  id="email2"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-1.5"
+                  placeholder="you@example.com"
+                />
               </div>
               <div>
                 <Label htmlFor="pw2">Password</Label>
-                <Input id="pw2" type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-1.5" placeholder="••••••••" />
+                <Input
+                  id="pw2"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1.5"
+                  placeholder="••••••••"
+                />
               </div>
               {error && <p className="text-sm text-destructive">{error}</p>}
               <Button type="submit" className="w-full rounded-full">
@@ -106,7 +129,9 @@ function Signup() {
         ) : (
           <div className="mt-6">
             <h2 className="text-2xl font-bold">What are you curious about?</h2>
-            <p className="mt-1 text-sm text-muted-foreground">Pick a few — we'll shape your feed.</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Pick a few — we'll shape your feed.
+            </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {topics.map((t) => {
                 const on = picked.includes(t);
