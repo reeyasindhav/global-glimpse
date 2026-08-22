@@ -29,7 +29,7 @@ const legalLinks = [
 type Icon = ForwardRefExoticComponent<LucideProps>;
 
 const social: { icon: Icon; label: string; href: string }[] = [
-  { icon: Globe2, label: "Website", href: "https://www.culturiq.com" },
+  { icon: Globe2, label: "Website", href: "https://globe-spark-discovery.lovable.app/" },
   { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
   { icon: Twitter, label: "Twitter", href: "https://twitter.com" },
   { icon: Dribbble, label: "Dribbble", href: "https://dribbble.com" },
