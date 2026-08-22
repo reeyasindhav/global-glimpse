@@ -1,6 +1,9 @@
 import type { ForwardRefExoticComponent } from "react";
-import { Dribbble, Globe2, Heart, Instagram, type LucideProps, Twitter } from "lucide-react";
+import { Dribbble, Globe2, Heart, Instagram, type LucideProps, Mail, Twitter } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const exploreLinks = [
   { to: "/explore", label: "Explore map" },
@@ -12,8 +15,12 @@ const exploreLinks = [
 
 const companyLinks = [
   { to: "/about", label: "About" },
+  { to: "/careers", label: "Careers" },
   { to: "/contact", label: "Contact" },
   { to: "/faq", label: "FAQ" },
+];
+
+const legalLinks = [
   { to: "/privacy", label: "Privacy" },
   { to: "/cookies", label: "Cookies" },
   { to: "/terms", label: "Terms" },
@@ -27,6 +34,15 @@ const social: { icon: Icon; label: string; href: string }[] = [
   { icon: Twitter, label: "Twitter", href: "https://twitter.com" },
   { icon: Dribbble, label: "Dribbble", href: "https://dribbble.com" },
 ];
+
+function FooterColumn({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <p className="text-xs font-semibold tracking-[0.14em] text-cream/40 uppercase">{title}</p>
+      {children}
+    </div>
+  );
+}
 
 export function SiteFooter() {
   return (
@@ -51,11 +67,8 @@ export function SiteFooter() {
           </div>
 
           {/* Link columns */}
-          <div className="md:col-span-3 grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div>
-              <p className="text-xs font-semibold tracking-[0.14em] text-cream/40 uppercase">
-                Explore
-              </p>
+          <div className="md:col-span-3 grid grid-cols-1 gap-8 md:grid-cols-5">
+            <FooterColumn title="Explore">
               <ul className="mt-4 flex flex-col gap-2.5">
                 {exploreLinks.map((l) => (
                   <li key={l.to}>
@@ -68,12 +81,9 @@ export function SiteFooter() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </FooterColumn>
 
-            <div>
-              <p className="text-xs font-semibold tracking-[0.14em] text-cream/40 uppercase">
-                Company
-              </p>
+            <FooterColumn title="Company">
               <ul className="mt-4 flex flex-col gap-2.5">
                 {companyLinks.map((l) => (
                   <li key={l.to}>
@@ -86,29 +96,63 @@ export function SiteFooter() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </FooterColumn>
 
-            <div>
-              <p className="text-xs font-semibold tracking-[0.14em] text-cream/40 uppercase">
-                Social
-              </p>
+            <FooterColumn title="Legal">
               <ul className="mt-4 flex flex-col gap-2.5">
-                {social.map((s) => (
-                  <li key={s.label}>
+                {legalLinks.map((l) => (
+                  <li key={l.to}>
+                    <Link
+                      to={l.to}
+                      className="text-sm text-cream/70 transition-colors hover:text-primary"
+                    >
+                      {l.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </FooterColumn>
+
+            <FooterColumn title="Social">
+              <div className="mt-4 flex items-center gap-3">
+                {social.map((s) => {
+                  const Icon = s.icon;
+                  return (
                     <a
+                      key={s.label}
                       href={s.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="flex items-center gap-2 text-sm text-cream/70 transition-colors hover:text-primary"
+                      className="flex size-8 items-center justify-center rounded-lg bg-cream/10 text-cream/70 transition-colors hover:bg-primary hover:text-primary-foreground"
                     >
-                      <s.icon className="size-4" />
-                      {s.label}
+                      <Icon className="size-4" />
                     </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  );
+                })}
+              </div>
+            </FooterColumn>
+
+            <FooterColumn title="Stay curious">
+              <p className="mt-4 text-sm text-cream/70">
+                Get cultural stories and festival reminders in your inbox.
+              </p>
+              <form className="mt-4 flex gap-2" onSubmit={(e) => e.preventDefault()}>
+                <Input
+                  type="email"
+                  placeholder="you@example.com"
+                  aria-label="Email address"
+                  className="h-9 rounded-full border-border/30 bg-cream/5 text-cream placeholder:text-cream/40 focus:ring-2 focus:ring-primary/30"
+                />
+                <Button
+                  type="submit"
+                  size="sm"
+                  className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90"
+                >
+                  <Mail className="size-4" />
+                </Button>
+              </form>
+            </FooterColumn>
           </div>
         </div>
 

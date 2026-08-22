@@ -17,7 +17,6 @@ export const Route = createFileRoute("/privacy")({
   component: Privacy,
 });
 
-
 function Privacy() {
   return (
     <div className="mx-auto w-full max-w-3xl px-5 py-20">
